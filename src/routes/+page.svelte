@@ -9,14 +9,4 @@
     <li>変更はリアルタイムで反映されます</li>
 </ul>
 
-<h2>ティッカーを作成する</h2>
-
-<form method="post">
-    <label for="Lname">ティッカーの名前 (URLの一部になります)</label>
-    <input type="input" name="name" id="Lname"/>
-    <label for="Lphrase">管理画面用パスフレーズ</label>
-    <input type="input" name="phrase" id="Lphrase" />
-    <button type="submit">作成する</button>
-</form>
-
 </main>
