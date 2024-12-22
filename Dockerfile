@@ -2,10 +2,8 @@ FROM node:23-bookworm AS build
 
 WORKDIR /app
 
-COPY ./app/package*.json ./
+COPY . /app
 RUN --mount=type=cache,target=/root/.npm npm install
-
-COPY ./app /app
 
 RUN npm run build
 
