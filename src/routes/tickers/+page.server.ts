@@ -1,4 +1,4 @@
-import { fail, redirect } from '@sveltejs/kit';
+import { fail, redirect, type Actions } from '@sveltejs/kit';
 
 export const actions = {
     create: async ({request}) => {
@@ -7,7 +7,7 @@ export const actions = {
         if ( name === '12345' ) {
             return fail(400, {isAlreadyTaken: true, prevName: name});
         } else {
-            return redirect(304, `/tickers/${name}/`);
+            redirect(303, `/tickers/${name}/`);
         }
     }
-}
+} satisfies Actions;
