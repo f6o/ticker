@@ -1,3 +1,7 @@
+<svelte:head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css" />
+</svelte:head>
+
 <header>
     <h1>sf6ticker2</h1>
 </header>
