@@ -1,4 +1,5 @@
 import { getAuthToken } from '$lib/server/auth';
+import { findName } from '$lib/server/firebase';
 import { fail, redirect, type Actions } from '@sveltejs/kit';
 
 export const actions = {
@@ -17,7 +18,8 @@ export const actions = {
         const name = formData.get('name');
         const phrase = formData.get('phrase');
         if ( name && phrase ) {
-            if ( name === '12345' && phrase === 'ticker00' ) {
+            const data = await findName(name.toString());
+            if ( data && data.passphrase === phrase.toString() ) {
                 const token = getAuthToken(name.toString(), phrase.toString());
                 cookies.set('htua', token, { path: '/' });
             }
