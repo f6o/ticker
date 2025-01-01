@@ -1,0 +1,22 @@
+steps:
+  # Docker Build
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 
+           'gcr.io/${PROJECT_ID}/${REPO_NAME}/${BRANCH_NAME}-${SHORT_SHA}', 
+           '.']
+    env:
+      - 'FIREBASE_REALTIMEDATABASE_URL=${_FIREBASE_RTDB_URL}'
+      - 'AUTH_SALT=${_AUTH_SALT}'
+
+  # Docker Push
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 
+           'gcr.io/${PROJECT_ID}/${REPO_NAME}/${BRANCH_NAME}-${SHORT_SHA}']
+
+  # Entrypoint, timeout and environment variables
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: 'gcloud'
+    timeout: 240s
+    args: ['run', 'deploy', '${_SERVICE_NAME}'
+           '--image', 'gcr.io/${PROJECT_ID}/${REPO_NAME}/${BRANCH_NAME}-${SHORT_SHA}'
+           '--region', '${_DEPLOY_REGION}']
