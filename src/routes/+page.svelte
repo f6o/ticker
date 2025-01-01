@@ -6,6 +6,9 @@
     <h1>sf6ticker2</h1>
 </header>
 <main class="container">
+    <p>
+        <a href="/tickers/">作成</a>
+    </p>
 <ul>
     <li>配信画面で対戦している名前や勝利数などを表示できる簡易ティッカーです</li>
     <li>OBSのブラウザソースに本ティッカーのURLを設定します</li>
