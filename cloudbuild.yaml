@@ -3,10 +3,9 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-t', 
            'gcr.io/${PROJECT_ID}/${REPO_NAME}/${BRANCH_NAME}-${SHORT_SHA}', 
+           '--build-arg', 'FIREBASE_REALTIMEDATABASE_URL=${_FIREBASE_RTDB_URL}',
+           '--build-arg', 'AUTH_SALT=${_AUTH_SALT}',
            '.']
-    env:
-      - 'FIREBASE_REALTIMEDATABASE_URL=${_FIREBASE_RTDB_URL}'
-      - 'AUTH_SALT=${_AUTH_SALT}'
 
   # Docker Push
   - name: 'gcr.io/cloud-builders/docker'
