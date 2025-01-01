@@ -8,6 +8,7 @@
     let { data }: { data : PageData } = $props();
 </script>
 
+<div class="container">
 {#if data.isAuthenticated}
 <h1>設定画面</h1>
 <h2>情報</h2>
@@ -20,3 +21,4 @@
 <button type="submit">確認</button>
 </form>
 {/if}
+</div>
