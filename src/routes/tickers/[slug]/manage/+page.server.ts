@@ -1,16 +1,21 @@
-import type { PageServerLoad } from "../../$types";
+import type { PageServerLoad } from "./$types";
 
-export const load: PageServerLoad = async ({params, cookies}) => {
+export const load: PageServerLoad = ({params, cookies}) => {
     const authToken = 'TODO_here_';
-    if ( authToken === cookies.get('authenticated') ) {
-        return {
-            slug: params.slug,
-            isAuthenticated: true
+    const requestAuthToken = cookies.get('authenticated');
+
+    if ( requestAuthToken ) {
+        if ( authToken === requestAuthToken ) {
+            return {
+                slug: params.slug,
+                isAuthenticated: true
+            }
+        } else {
+            cookies.delete('authenticated', {path: '/'});
         }
-    } else {
-        return {
-            slug: params.slug,
-            isAuthenticated: false
-        }
+    }
+    return {
+        slug: params.slug,
+        isAuthenticated: false
     }
 }
