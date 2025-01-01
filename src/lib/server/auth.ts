@@ -1,8 +1,9 @@
+import { AUTH_SALT } from '$env/static/private';
 import { createHmac } from 'node:crypto';
 
 export const cookieName = 'htua'
 
-const salt = process.env.AUTH_SALT || 'saltysalt';
+const salt = AUTH_SALT || 'saltysalt';
 
 export const getAuthToken = (name: string, passphrase: string) => {
     const body = `${name}/${passphrase}`;
