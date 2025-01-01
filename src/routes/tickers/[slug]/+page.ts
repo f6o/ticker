@@ -10,7 +10,7 @@ export const load: PageLoad = ({ params }) => {
             tickerColor: '#ff0',
             backgroundColor: '#000',
             foreGroundColor: '#fff',
-        }, 
+        } as TickerLayout, 
         info: {
             centerText: '1回戦',
             slit1: " ",
@@ -23,6 +23,6 @@ export const load: PageLoad = ({ params }) => {
                 name: "リュウ",
                 wins: 2
             }
-        }
+        } as TickerData
     }
 }

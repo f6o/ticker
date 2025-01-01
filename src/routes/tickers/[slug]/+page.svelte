@@ -2,8 +2,9 @@
 	import type { PageData } from "./$types";
 
     let { data } : { data : PageData } = $props();
+    let { ticker, info }  = data;
 
-    let fullWidth = data.ticker.width
+    let fullWidth = ticker.width
 
     let marginX = 262
     let padding = 16
@@ -14,34 +15,34 @@
     let centerAreaWidth = 236
     let centerAreaHeight = 48
 
-    let tickerWidth = (data.ticker.width - marginX*2 - slitWidth*2 - centerAreaWidth)/2
-    let tickerHeight = data.ticker.height
+    let tickerWidth = (ticker.width - marginX*2 - slitWidth*2 - centerAreaWidth)/2
+    let tickerHeight = ticker.height
 
-    let backgroundColor = data.ticker.backgroundColor;
-    let foreGroundColor = data.ticker.foreGroundColor;
-    let winForeGroundColor = data.ticker.textColor;
-    let centerBackGroundColor = data.ticker.tickerColor;
-    let centerForeGroundColor = data.ticker.textColor;
+    let backgroundColor = ticker.backgroundColor;
+    let foreGroundColor = ticker.foreGroundColor;
+    let winForeGroundColor = ticker.textColor;
+    let centerBackGroundColor = ticker.tickerColor;
+    let centerForeGroundColor = ticker.textColor;
 
     let player1NameFontX = marginX + padding
     let player2NameFontX = fullWidth - player1NameFontX
 
-    let nameFontSize = data.ticker.height * 0.7
+    let nameFontSize = ticker.height * 0.7
     let nameFontY = nameFontSize + 3
 
     let slitFontSize = slitHeight * 0.7
     let slitFontY = slitFontSize + 3
 
-    let centerAreaFontSize = data.ticker.height * 0.7
+    let centerAreaFontSize = ticker.height * 0.7
     let centerAreaFontY = centerAreaFontSize
 
-    let centerText = $state(data.info.centerText);
+    let centerText = $state(info.centerText);
 
-    let player1Name = $state(data.info.p1.name);
-    let player1Wins = $state(data.info.p1.wins);
+    let player1Name = $state(info.p1.name);
+    let player1Wins = $state(info.p1.wins);
 
-    let player2Name = $state(data.info.p2.name);
-    let player2Wins = $state(data.info.p2.wins);
+    let player2Name = $state(info.p2.name);
+    let player2Wins = $state(info.p2.wins);
 
 </script>
 
