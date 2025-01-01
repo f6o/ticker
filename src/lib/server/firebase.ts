@@ -1,22 +1,16 @@
-import { initializeServerApp } from 'firebase/app'
-import { get, getDatabase, ref } from 'firebase/database'
+import { FIREBASE_REALTIMEDATABASE_URL } from '$env/static/private';
+import admin from 'firebase-admin';
+import { applicationDefault } from 'firebase-admin/app';
 
-const databaseURL = process.env.FIREBASE_REALTTIMEDATABSE_URL
-if ( !databaseURL ) {
-    throw new Error("undefined")
+const app = admin.initializeApp({
+    credential: applicationDefault(),
+    databaseURL: FIREBASE_REALTIMEDATABASE_URL,
+});
+
+const db = admin.database(app);
+
+export const findName = async (name: string): Promise<any> => {
+    let ref = db.ref("ticker/" + name);
+    let snapshot = await ref.get();
+    return snapshot.val();
 }
-
-const app = initializeServerApp({
-    databaseURL: databaseURL,
-}, {
-    
-})
-
-const database = getDatabase(app)
-
-const findName = async (name: string): Promise<any> => {
-    const snapshot = await get(ref(database, "tickers/" + name))
-    return snapshot.val()
-}
-
-export { findName }
