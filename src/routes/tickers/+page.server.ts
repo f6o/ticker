@@ -1,3 +1,4 @@
+import { getAuthToken } from '$lib/server/auth';
 import { fail, redirect, type Actions } from '@sveltejs/kit';
 
 export const actions = {
@@ -15,9 +16,13 @@ export const actions = {
         const formData = await request.formData();
         const name = formData.get('name');
         const phrase = formData.get('phrase');
-        if ( name === '12345' && phrase === 'ticker00' ) {
-            cookies.set('authenticated', 'TODO_here_', { path: '/' });
+        if ( name && phrase ) {
+            if ( name === '12345' && phrase === 'ticker00' ) {
+                const token = getAuthToken(name.toString(), phrase.toString());
+                cookies.set('authenticated', token, { path: '/' });
+            }
         }
+
         redirect(303, `/tickers/${name}/manage`);
     }
 } satisfies Actions;
