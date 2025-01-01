@@ -3,7 +3,7 @@ import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({params, cookies}) => {
     const name = params.slug;
-    const requestAuthToken = cookies.get('authenticated');
+    const requestAuthToken = cookies.get('htua');
     if ( requestAuthToken ) {
         // TODO: load from DB
         const passphrase = 'ticker00';
@@ -15,7 +15,7 @@ export const load: PageServerLoad = async ({params, cookies}) => {
                     isAuthenticated: true
                 }
             } else {
-                cookies.delete('authenticated', {path: '/'});
+                cookies.delete('htua', {path: '/'});
             }
         }
     }

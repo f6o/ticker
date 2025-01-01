@@ -19,7 +19,7 @@ export const actions = {
         if ( name && phrase ) {
             if ( name === '12345' && phrase === 'ticker00' ) {
                 const token = getAuthToken(name.toString(), phrase.toString());
-                cookies.set('authenticated', token, { path: '/' });
+                cookies.set('htua', token, { path: '/' });
             }
         }
 
