@@ -17,6 +17,6 @@ steps:
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     entrypoint: 'gcloud'
     timeout: 240s
-    args: ['run', 'deploy', '${_SERVICE_NAME}'
+    args: ['run', 'deploy', '${_SERVICE_NAME}',
            '--image', 'gcr.io/${PROJECT_ID}/${REPO_NAME}/${BRANCH_NAME}-${SHORT_SHA}'
            '--region', '${_DEPLOY_REGION}']
