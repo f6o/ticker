@@ -4,8 +4,8 @@ WORKDIR /app
 
 COPY . /app
 #RUN --mount=type=cache,target=/root/.npm npm install
+RUN env
 RUN npm install
-RUN sh -c 'env | grep AUTH_SALT >> .env'
 RUN npm run build
 
 FROM node:23-bookworm-slim
