@@ -14,5 +14,6 @@ WORKDIR /app
 
 COPY --from=build /app/package*.json ./
 COPY --from=build /app/build ./build
+COPY --from=build /app/.firebase_token ./
 
 CMD ["node", "build"]
