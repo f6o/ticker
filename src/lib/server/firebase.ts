@@ -6,7 +6,7 @@ const app = admin.initializeApp({
     credential: cert({
         projectId: FIREBASE_PROJECT_ID,
         clientEmail: FIREBASE_PROJECT_CLIENT_EMAIL,
-        privateKey: FIREBASE_PROJECT_PRIVATE_KEY,
+        privateKey: `-----BEGIN PRIVATE KEY-----\n${FIREBASE_PROJECT_PRIVATE_KEY}\n-----END PRIVATE KEY-----\n`,
     }),
     databaseURL: FIREBASE_REALTIMEDATABASE_URL,
 });
