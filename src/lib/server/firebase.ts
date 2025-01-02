@@ -1,4 +1,4 @@
-import { FIREBASE_PROJECT_CLIENT_EMAIL, FIREBASE_PROJECT_ID, FIREBASE_REALTIMEDATABASE_URL } from '$env/static/private';
+import { FIREBASE_PROJECT_PRIVATE_KEY, FIREBASE_PROJECT_CLIENT_EMAIL, FIREBASE_PROJECT_ID, FIREBASE_REALTIMEDATABASE_URL } from '$env/static/private';
 import admin from 'firebase-admin';
 import { cert } from 'firebase-admin/app';
 
