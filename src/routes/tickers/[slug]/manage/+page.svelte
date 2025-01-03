@@ -12,6 +12,13 @@
 {#if data.isAuthenticated}
 <h1>設定画面</h1>
 <h2>情報</h2>
+<form method="POST" action="/tickers?/update">
+<input type="hidden" name="name" value="{data.slug}" />
+<input name="centerText" id="LcenterText" />
+<input name="player1" id="Lplayer1" /><input name="player1wins" type="number" />
+<input name="player2" id="Lplayer2" /><input name="player2wins" type="number" />
+<button type="submit">更新</button>
+</form>
 <h2>レイアウト情報</h2>
 {:else}
 <h1>パスフレーズを入力してください</h1>

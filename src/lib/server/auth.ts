@@ -1,7 +1,7 @@
 import { AUTH_SALT } from '$env/static/private';
 import { createHmac } from 'node:crypto';
 
-export const cookieName = 'htua'
+export const AUTH_COOKIE_NAME = 'htua'
 
 const salt = AUTH_SALT || 'saltysalt';
 

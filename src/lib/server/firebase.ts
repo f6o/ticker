@@ -19,6 +19,12 @@ export const findName = async (name: string): Promise<any> => {
     return snapshot.val();
 }
 
+export const updatePlayerInfo = async (name: string, info: TickerData) => {
+    let ref = db.ref('ticker/'+name);
+    const infoRef = ref.child('info');
+    await infoRef.update(info);
+}
+
 export const getPassphrase = async (name: string): Promise<string> => {
     let ref = db.ref('passphrase/' + name);
     let snapshot = await ref.get();
