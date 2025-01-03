@@ -18,3 +18,9 @@ export const findName = async (name: string): Promise<any> => {
     let snapshot = await ref.get();
     return snapshot.val();
 }
+
+export const getPassphrase = async (name: string): Promise<string> => {
+    let ref = db.ref('passphrase/' + name);
+    let snapshot = await ref.get();
+    return snapshot.val();
+}
