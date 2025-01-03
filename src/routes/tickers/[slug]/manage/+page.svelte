@@ -10,25 +10,26 @@
 
     let { data }: { data : PageData } = $props();
 
-    const ref = getTickerRef(data.slug);
-
     let centerText = $state('');
     let player1Name = $state('');
     let player2Name = $state('');
     let player1Wins = $state(0);
     let player2Wins = $state(0);
 
-    onValue(ref, (snapshot) => {
-        let { info } = snapshot.val();
-        centerText = info.centerText;
-        player1Name = info.p1.name;
-        player2Name = info.p2.name;
-        player1Wins = info.p1.wins;
-        player2Wins = info.p2.wins;
-    }, {
-        onlyOnce: true
-    })
+    if ( data.isAuthenticated ) {
+        const ref = getTickerRef(data.slug);
 
+        onValue(ref, (snapshot) => {
+            let { info } = snapshot.val();
+            centerText = info.centerText;
+            player1Name = info.p1.name;
+            player2Name = info.p2.name;
+            player1Wins = info.p1.wins;
+            player2Wins = info.p2.wins;
+        }, {
+            onlyOnce: true
+        })
+    }
 </script>
 
 <div class="container">
