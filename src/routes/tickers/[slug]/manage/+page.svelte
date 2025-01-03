@@ -3,9 +3,32 @@
 </svelte:head>
 
 <script lang="ts">
+	import { getTickerRef } from "$lib/firebase";
 	import type { PageData } from "./$types";
 
+    import { onValue } from "@firebase/database";
+
     let { data }: { data : PageData } = $props();
+
+    const ref = getTickerRef(data.slug);
+
+    let centerText = $state('');
+    let player1Name = $state('');
+    let player2Name = $state('');
+    let player1Wins = $state(0);
+    let player2Wins = $state(0);
+
+    onValue(ref, (snapshot) => {
+        let { info } = snapshot.val();
+        centerText = info.centerText;
+        player1Name = info.p1.name;
+        player2Name = info.p2.name;
+        player1Wins = info.p1.wins;
+        player2Wins = info.p2.wins;
+    }, {
+        onlyOnce: true
+    })
+
 </script>
 
 <div class="container">
@@ -14,9 +37,9 @@
 <h2>情報</h2>
 <form method="POST" action="/tickers?/update">
 <input type="hidden" name="name" value="{data.slug}" />
-<input name="centerText" id="LcenterText" />
-<input name="player1" id="Lplayer1" /><input name="player1wins" type="number" />
-<input name="player2" id="Lplayer2" /><input name="player2wins" type="number" />
+<input name="centerText" id="LcenterText" bind:value={centerText} />
+<input name="player1" id="Lplayer1" bind:value={player1Name} /><input name="player1wins" type="number" bind:value={player1Wins} />
+<input name="player2" id="Lplayer2" bind:value={player2Name} /><input name="player2wins" type="number" bind:value={player2Wins} />
 <button type="submit">更新</button>
 </form>
 <h2>レイアウト情報</h2>
