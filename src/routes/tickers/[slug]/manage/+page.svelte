@@ -41,14 +41,40 @@
 <h1>設定画面</h1>
 <h2>情報</h2>
 {#if loading}
-<p>情報取得中...</p>
+<div>
+    <p aria-busy="true">情報取得中...</p>
+</div>
 {:else}
 <form method="POST" action="/tickers?/update">
 <input type="hidden" name="name" value="{data.slug}" />
-<input name="centerText" id="LcenterText" bind:value={centerText} />
-<input name="player1" id="Lplayer1" bind:value={player1Name} /><input name="player1wins" type="number" bind:value={player1Wins} />
-<input name="player2" id="Lplayer2" bind:value={player2Name} /><input name="player2wins" type="number" bind:value={player2Wins} />
-<button type="submit">更新</button>
+<div class="grid">
+    <div>
+        <fieldset role="group">
+            <input name="player1" id="Lplayer1" bind:value={player1Name} />
+            <input name="player1wins" type="number" bind:value={player1Wins} />
+        </fieldset>
+    </div>
+    <div>
+        <input name="centerText" id="LcenterText" bind:value={centerText} />
+    </div>
+    <div>
+        <fieldset role="group">
+            <input name="player2" id="Lplayer2" bind:value={player2Name} />
+            <input name="player2wins" type="number" bind:value={player2Wins} />
+        </fieldset>
+    </div>
+</div>
+<div class="grid">
+    <div>
+        <!-- filler -->
+    </div>
+    <div>
+        <button type="button" class="secondary">勝利数リセット</button>
+    </div>
+    <div>
+        <button type="submit">更新</button>
+    </div>
+</div>
 </form>
 {/if}
 <h2>レイアウト情報</h2>
