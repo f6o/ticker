@@ -49,6 +49,7 @@
 <input type="hidden" name="name" value="{data.slug}" />
 <div class="grid">
     <div>
+        <!-- svelte-ignore a11y_no_redundant_roles -->
         <fieldset role="group">
             <input name="player1" id="Lplayer1" bind:value={player1Name} />
             <input name="player1wins" type="number" bind:value={player1Wins} />
@@ -58,6 +59,7 @@
         <input name="centerText" id="LcenterText" bind:value={centerText} />
     </div>
     <div>
+        <!-- svelte-ignore a11y_no_redundant_roles -->
         <fieldset role="group">
             <input name="player2" id="Lplayer2" bind:value={player2Name} />
             <input name="player2wins" type="number" bind:value={player2Wins} />
