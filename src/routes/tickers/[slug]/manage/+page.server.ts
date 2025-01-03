@@ -1,10 +1,10 @@
-import { getAuthToken } from "$lib/server/auth";
+import { AUTH_COOKIE_NAME, getAuthToken } from "$lib/server/auth";
 import { getPassphrase } from "$lib/server/firebase";
 import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({params, cookies}) => {
     const name = params.slug;
-    const requestAuthToken = cookies.get('htua');
+    const requestAuthToken = cookies.get(AUTH_COOKIE_NAME);
     if ( requestAuthToken ) {
         const passphrase = await getPassphrase(name);
         if ( passphrase ) {
@@ -15,7 +15,7 @@ export const load: PageServerLoad = async ({params, cookies}) => {
                     isAuthenticated: true
                 }
             } else {
-                cookies.delete('htua', {path: '/'});
+                cookies.delete(AUTH_COOKIE_NAME, {path: '/'});
             }
         }
     }
