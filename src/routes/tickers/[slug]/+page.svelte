@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getTickerRef } from "$lib/firebase";
-	import { onValue } from "firebase/database";
+	import { onValue } from "@firebase/database";
 	import type { PageData } from "./$types";
 
     let { data } : { data : PageData } = $props();
