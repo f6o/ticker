@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { getTickerRef } from "$lib/firebase";
+	import { onValue } from "firebase/database";
 	import type { PageData } from "./$types";
 
     let { data } : { data : PageData } = $props();
@@ -44,6 +46,15 @@
     let player2Name = $state(info.p2.name);
     let player2Wins = $state(info.p2.wins);
 
+    const tickerRef = getTickerRef(data.slug);
+    onValue(tickerRef, (snapshot) => {
+        let newData = snapshot.val();
+        centerText = newData.info.centerText;
+        player1Name = newData.info.p1.name;
+        player1Wins = newData.info.p1.wins;
+        player2Name = newData.info.p2.name;
+        player2Wins = newData.info.p2.wins;
+    });
 </script>
 
 <style>
