@@ -1,5 +1,5 @@
 import { getAuthToken } from "$lib/server/auth";
-import { findName, getPassphrase } from "$lib/server/firebase";
+import { getPassphrase } from "$lib/server/firebase";
 import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({params, cookies}) => {
