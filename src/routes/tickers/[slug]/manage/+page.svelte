@@ -10,6 +10,8 @@
 
     let { data }: { data : PageData } = $props();
 
+    let loading = $state('init')
+
     let centerText = $state('');
     let player1Name = $state('');
     let player2Name = $state('');
@@ -19,6 +21,7 @@
     if ( data.isAuthenticated ) {
         const ref = getTickerRef(data.slug);
 
+        loading = 'loading'
         onValue(ref, (snapshot) => {
             let { info } = snapshot.val();
             centerText = info.centerText;
@@ -26,6 +29,7 @@
             player2Name = info.p2.name;
             player1Wins = info.p1.wins;
             player2Wins = info.p2.wins;
+            loading = '';
         }, {
             onlyOnce: true
         })
@@ -36,6 +40,9 @@
 {#if data.isAuthenticated}
 <h1>設定画面</h1>
 <h2>情報</h2>
+{#if loading}
+<p>情報取得中...</p>
+{:else}
 <form method="POST" action="/tickers?/update">
 <input type="hidden" name="name" value="{data.slug}" />
 <input name="centerText" id="LcenterText" bind:value={centerText} />
@@ -43,6 +50,7 @@
 <input name="player2" id="Lplayer2" bind:value={player2Name} /><input name="player2wins" type="number" bind:value={player2Wins} />
 <button type="submit">更新</button>
 </form>
+{/if}
 <h2>レイアウト情報</h2>
 {:else}
 <h1>パスフレーズを入力してください</h1>
