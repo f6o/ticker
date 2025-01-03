@@ -1,5 +1,5 @@
 import { getAuthToken } from '$lib/server/auth';
-import { findName, getPassphrase } from '$lib/server/firebase';
+import { getPassphrase } from '$lib/server/firebase';
 import { fail, redirect, type Actions } from '@sveltejs/kit';
 
 export const actions = {
