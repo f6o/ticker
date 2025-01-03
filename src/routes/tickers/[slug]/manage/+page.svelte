@@ -18,6 +18,11 @@
     let player1Wins = $state(0);
     let player2Wins = $state(0);
 
+    function resetWins() {
+        player1Wins = 0;
+        player2Wins = 0;
+    }
+
     if ( data.isAuthenticated ) {
         const ref = getTickerRef(data.slug);
 
@@ -71,7 +76,7 @@
         <!-- filler -->
     </div>
     <div>
-        <button type="button" class="secondary">勝利数リセット</button>
+        <button type="button" class="secondary" onclick={resetWins}>勝利数リセット</button>
     </div>
     <div>
         <button type="submit">更新</button>
