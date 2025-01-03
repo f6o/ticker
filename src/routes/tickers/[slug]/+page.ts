@@ -1,8 +1,9 @@
 import type { PageLoad } from "./$types";
 
-export const load: PageLoad = ({ params }) => {
+export const load: PageLoad = ({ data }) => {
     return {
-        slug: params.slug,
+        slug: data.slug,
+        info: data.tickerInfo as TickerData,
         ticker: {
             width: 1920,
             height: 48,
@@ -10,19 +11,6 @@ export const load: PageLoad = ({ params }) => {
             tickerColor: '#ff0',
             backgroundColor: '#000',
             foreGroundColor: '#fff',
-        } as TickerLayout, 
-        info: {
-            centerText: '1回戦',
-            slit1: " ",
-            slit2: " ",
-            p1: {
-                name: "ゲン",
-                wins: 3
-            },
-            p2: {
-                name: "リュウ",
-                wins: 2
-            }
-        } as TickerData
+        } as TickerLayout,
     }
 }

@@ -38,25 +38,28 @@
     let centerAreaFontSize = ticker.height * 0.7
     let centerAreaFontY = centerAreaFontSize
 
-    let centerText = $state(info.centerText);
+    let centerText = $state('');
 
-    let player1Name = $state(info.p1.name);
-    let player1Wins = $state(info.p1.wins);
+    let player1Name = $state('');
+    let player1Wins = $state(0);
 
-    let player2Name = $state(info.p2.name);
-    let player2Wins = $state(info.p2.wins);
+    let player2Name = $state('');
+    let player2Wins = $state(0);
 
+    if ( info ) {
     const tickerRef = getTickerRef(data.slug);
-    onValue(tickerRef, (snapshot) => {
-        let newData = snapshot.val();
-        centerText = newData.info.centerText;
-        player1Name = newData.info.p1.name;
-        player1Wins = newData.info.p1.wins;
-        player2Name = newData.info.p2.name;
-        player2Wins = newData.info.p2.wins;
-    });
+        onValue(tickerRef, (snapshot) => {
+            let newData = snapshot.val();
+            centerText = newData.info.centerText;
+            player1Name = newData.info.p1.name;
+            player1Wins = newData.info.p1.wins;
+            player2Name = newData.info.p2.name;
+            player2Wins = newData.info.p2.wins;
+        });
+    }
 </script>
 
+{#if info}
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
 </style>
@@ -179,3 +182,4 @@
 
 
 </svg>
+{/if}
