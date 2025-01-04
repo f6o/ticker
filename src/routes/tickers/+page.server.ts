@@ -1,16 +1,26 @@
 import { AUTH_COOKIE_NAME, getAuthToken } from '$lib/server/auth';
-import { getPassphrase, updatePlayerInfo } from '$lib/server/firebase';
+import { createPlayerInfo, getPassphrase, savePassphrase, updatePlayerInfo } from '$lib/server/firebase';
 import { fail, redirect, type Actions } from '@sveltejs/kit';
 
 export const actions = {
     create: async ({request}) => {
         const formData = await request.formData();
         const name = formData.get('name');
-        if ( name === '12345' ) {
-            return fail(400, {isAlreadyTaken: true, prevName: name});
-        } else {
-            redirect(303, `/tickers/${name}/`);
+        const phrase = formData.get('phrase');
+
+        if ( name && phrase ) {
+            const passphraseInDb = await getPassphrase(name.toString());
+            if ( passphraseInDb ) {
+                return fail(400, {isAlreadyTaken: true, prevName: name});
+            } else {
+                await Promise.all([
+                    createPlayerInfo(name.toString()),
+                    savePassphrase(name.toString(), phrase.toString())
+                ]);
+            }
         }
+
+        redirect(303, `/tickers/${name}/`);
     },
 
     auth: async ({cookies, request}) => {
