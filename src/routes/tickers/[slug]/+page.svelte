@@ -6,7 +6,11 @@
     let { data } : { data : PageData } = $props();
     let { ticker, info }  = data;
 
-    let fullWidth = ticker.width
+    let backgroundColor = $state(ticker.backgroundColor);
+    let foreGroundColor = $state(ticker.foreGroundColor);
+    let winForeGroundColor = $state(ticker.textColor);
+    let centerBackGroundColor = $state(ticker.tickerColor);
+    let centerForeGroundColor = $state(ticker.textColor);
 
     let marginX = 262
     let padding = 16
@@ -17,26 +21,21 @@
     let centerAreaWidth = 236
     let centerAreaHeight = 48
 
-    let tickerWidth = (ticker.width - marginX*2 - slitWidth*2 - centerAreaWidth)/2
-    let tickerHeight = ticker.height
-
-    let backgroundColor = ticker.backgroundColor;
-    let foreGroundColor = ticker.foreGroundColor;
-    let winForeGroundColor = ticker.textColor;
-    let centerBackGroundColor = ticker.tickerColor;
-    let centerForeGroundColor = ticker.textColor;
+    let fullWidth = $state(ticker.width)
+    let tickerWidth = $derived((fullWidth- marginX*2 - slitWidth*2 - centerAreaWidth)/2)
+    let tickerHeight = $state(ticker.height)
 
     let player1NameFontX = marginX + padding
-    let player2NameFontX = fullWidth - player1NameFontX
+    let player2NameFontX = $derived(fullWidth - player1NameFontX)
 
-    let nameFontSize = ticker.height * 0.7
-    let nameFontY = nameFontSize + 3
+    let nameFontSize = $derived(tickerHeight * 0.7)
+    let nameFontY = $derived(nameFontSize + 3)
 
     let slitFontSize = slitHeight * 0.7
     let slitFontY = slitFontSize + 3
 
-    let centerAreaFontSize = ticker.height * 0.7
-    let centerAreaFontY = centerAreaFontSize
+    let centerAreaFontSize = $state(tickerHeight * 0.7)
+    let centerAreaFontY = $derived(centerAreaFontSize)
 
     let centerText = $state('');
 
