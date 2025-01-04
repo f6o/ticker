@@ -3,6 +3,7 @@
 </svelte:head>
 
 <script lang="ts">
+	import { enhance } from "$app/forms";
 	import { getTickerRef } from "$lib/firebase";
 	import type { PageData } from "./$types";
 
@@ -50,7 +51,13 @@
     <p aria-busy="true">情報取得中...</p>
 </div>
 {:else}
-<form method="POST" action="/tickers?/update">
+<form method="POST" action="/tickers?/update" use:enhance={() =>{
+    loading = 'loading';
+    return async ({update}) => {
+        await update();
+        loading = '';
+    }
+}}>
 <input type="hidden" name="name" value="{data.slug}" />
 <div class="grid">
     <div>
