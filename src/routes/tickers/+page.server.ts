@@ -5,17 +5,32 @@ import { fail, redirect, type Actions } from '@sveltejs/kit';
 export const actions = {
     create: async ({request}) => {
         const formData = await request.formData();
-        const name = formData.get('name');
-        const phrase = formData.get('phrase');
+        const nameFormData = formData.get('name');
+        const phraseFormData = formData.get('phrase');
+        if ( nameFormData && phraseFormData ) {
+            const name = nameFormData.toString();
+            const phrase = phraseFormData.toString();
 
-        if ( name && phrase ) {
-            const passphraseInDb = await getPassphrase(name.toString());
+            let validationError = { invalidName: false, invalidPhrase: false }
+            if ( !name.match(/^[a-zA-Z0-9]+$/) ) {
+                validationError.invalidName = true;
+            }
+
+            if ( !phrase.match(/^[a-zA-Z0-9]+$/) ) {
+                validationError.invalidPhrase = true;
+            }
+
+            if ( validationError.invalidName || validationError.invalidPhrase ) {
+                return fail(400, validationError)
+            }
+
+            const passphraseInDb = await getPassphrase(name);
             if ( passphraseInDb ) {
                 return fail(400, {isAlreadyTaken: true, prevName: name});
             } else {
                 await Promise.all([
-                    createPlayerInfo(name.toString()),
-                    savePassphrase(name.toString(), phrase.toString())
+                    createPlayerInfo(name),
+                    savePassphrase(name, phrase)
                 ]);
             }
         }
