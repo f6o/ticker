@@ -8,8 +8,8 @@ export const load: PageServerLoad = async ({params, cookies}) => {
     const data = await findName(name);
     if ( data ) {
         return {
+            ...data,
             slug: name,
-            tickerInfo: data
         }
     } else {
         error(404, 'ticker not found')
