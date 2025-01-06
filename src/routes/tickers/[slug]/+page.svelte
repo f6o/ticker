@@ -7,7 +7,7 @@
     let { ticker, info }  = data;
 
     let backgroundColor = $state(ticker.backgroundColor);
-    let foreGroundColor = $state(ticker.foreGroundColor);
+    let foreGroundColor = $state(ticker.foregroundColor);
     let winForeGroundColor = $state(ticker.textColor);
     let centerBackGroundColor = $state(ticker.tickerColor);
     let centerForeGroundColor = $state(ticker.textColor);
