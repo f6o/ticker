@@ -33,9 +33,10 @@ export const actions = {
                     savePassphrase(name, phrase)
                 ]);
             }
+            redirect(303, `/tickers/${nameFormData}/`);
         }
 
-        redirect(303, `/tickers/${name}/`);
+        fail(400, {unexpeced: true});
     },
 
     auth: async ({cookies, request}) => {
