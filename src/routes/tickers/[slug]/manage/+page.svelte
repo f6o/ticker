@@ -19,10 +19,10 @@
     let player1Wins = $state(0);
     let player2Wins = $state(0);
 
-    let backgroundColor = $state('#000');
-    let foregroundColor = $state('#fff');
-    let textColor = $state('#f00');
-    let tickerColor = $state('#0f0');
+    let backgroundColor = $state('');
+    let foregroundColor = $state('');
+    let textColor = $state('');
+    let tickerColor = $state('');
 
     function resetWins() {
         player1Wins = 0;
@@ -45,7 +45,7 @@
             backgroundColor = ticker.backgroundColor;
             foregroundColor = ticker.foregroundColor;
             textColor = ticker.textColor;
-            ticker = ticker.tickerColor;
+            tickerColor = ticker.tickerColor;
 
             loading = '';
         }, {
