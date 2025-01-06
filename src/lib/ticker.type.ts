@@ -4,7 +4,7 @@ interface TickerLayout {
     textColor: string;
     tickerColor: string;
     backgroundColor: string;
-    foreGroundColor: string;
+    foregroundColor: string;
 }
 
 interface PlayerData {

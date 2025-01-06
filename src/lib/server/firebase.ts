@@ -46,6 +46,12 @@ export const updatePlayerInfo = async (name: string, info: TickerData) => {
     await infoRef.update(info);
 }
 
+export const updateTickerColor = async (name: string, info: TickerLayout) => {
+    let ref = db.ref('ticker/'+name);
+    const colorRef = ref.child('ticker');
+    await colorRef.update(info);
+}
+
 export const getPassphrase = async (name: string): Promise<string> => {
     let ref = db.ref('passphrase/' + name);
     let snapshot = await ref.get();

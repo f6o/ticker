@@ -1,5 +1,5 @@
 import { AUTH_COOKIE_NAME, getAuthToken } from '$lib/server/auth';
-import { createPlayerInfo, getPassphrase, savePassphrase, updatePlayerInfo } from '$lib/server/firebase';
+import { createPlayerInfo, getPassphrase, savePassphrase, updatePlayerInfo, updateTickerColor } from '$lib/server/firebase';
 import { fail, redirect, type Actions } from '@sveltejs/kit';
 
 export const actions = {
@@ -68,4 +68,29 @@ export const actions = {
 
         redirect(303, `/tickers/${name}/manage`);
     },
+
+    colors: async({cookies, request}) => {
+        const formData = await request.formData();
+        const name = formData.get('name');
+
+        if ( name && cookies.get(AUTH_COOKIE_NAME) ) {
+            const backgroundColor = formData.get('backgroundColor');
+            const foregroundColor = formData.get('foregroundColor');
+            const textColor = formData.get('textColor');
+            const tickerColor = formData.get('tickerColor');
+            
+            if ( backgroundColor && foregroundColor && textColor && tickerColor ) {
+                await updateTickerColor(name?.toString(), {
+                    width: 1920,
+                    height: 48,
+                    backgroundColor: backgroundColor?.toString(),
+                    foregroundColor: foregroundColor?.toString(),
+                    tickerColor: tickerColor?.toString(),
+                    textColor: textColor?.toString(),
+                });
+            }
+        }
+
+        redirect(303, `/tickers/${name}/manage`);      
+    }
 } satisfies Actions;

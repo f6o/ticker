@@ -19,6 +19,11 @@
     let player1Wins = $state(0);
     let player2Wins = $state(0);
 
+    let backgroundColor = $state('#000');
+    let foregroundColor = $state('#fff');
+    let textColor = $state('#f00');
+    let tickerColor = $state('#0f0');
+
     function resetWins() {
         player1Wins = 0;
         player2Wins = 0;
@@ -29,12 +34,19 @@
 
         loading = 'loading'
         onValue(ref, (snapshot) => {
-            let { info } = snapshot.val();
+            let { info, ticker } = snapshot.val();
             centerText = info.centerText;
             player1Name = info.p1.name;
             player2Name = info.p2.name;
             player1Wins = info.p1.wins;
             player2Wins = info.p2.wins;
+
+            console.log(ticker)
+            backgroundColor = ticker.backgroundColor;
+            foregroundColor = ticker.foregroundColor;
+            textColor = ticker.textColor;
+            ticker = ticker.tickerColor;
+
             loading = '';
         }, {
             onlyOnce: true
@@ -92,6 +104,26 @@
 </form>
 {/if}
 <h2>レイアウト情報</h2>
+{#if loading}
+<div>
+    <p aria-busy="true">情報取得中...</p>
+</div>
+{:else}
+<form method="POST" action="/tickers?/colors" use:enhance={() =>{
+    loading = 'loading';
+    return async ({update}) => {
+        await update();
+        loading = '';
+    }
+}}>
+    <input type="hidden" name="name" value="{data.slug}" />
+    <input type="color" name="backgroundColor" bind:value={backgroundColor} />
+    <input type="color" name="foregroundColor" bind:value={foregroundColor} />
+    <input type="color" name="textColor" bind:value={textColor} />
+    <input type="color" name="tickerColor" bind:value={tickerColor} />
+    <button type="submit">更新</button>
+</form>
+{/if}
 {:else}
 <h1>パスフレーズを入力してください</h1>
 <form method="POST" action="/tickers?/auth">
