@@ -34,9 +34,18 @@ export const createPlayerInfo = async (name: string) => {
         }
     } as TickerData
 
+    let ticker = {
+        width: 1920,
+        height: 48,
+        backgroundColor: '#000',
+        foregroundColor: '#fff',
+        tickerColor: '#f00',
+        textColor: '#0f0'
+    } as TickerLayout
+
     let ref = db.ref('ticker/'+name);
     await ref.set({
-        info: info
+        ticker, info
     })
 }
 
