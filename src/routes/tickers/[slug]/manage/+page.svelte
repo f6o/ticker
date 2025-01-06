@@ -117,10 +117,22 @@
     }
 }}>
     <input type="hidden" name="name" value="{data.slug}" />
+    <label>
+    背景色
     <input type="color" name="backgroundColor" bind:value={backgroundColor} />
+    </label>
+    <label>
+    プレイヤー名の文字色
     <input type="color" name="foregroundColor" bind:value={foregroundColor} />
+    </label>
+    <label>
+    勝利数/中央の文字色
     <input type="color" name="textColor" bind:value={textColor} />
+    </label>
+    <label>
+    中央の背景色
     <input type="color" name="tickerColor" bind:value={tickerColor} />
+    </label>
     <button type="submit">更新</button>
 </form>
 {/if}
