@@ -6,6 +6,9 @@
     let { data } : { data : PageData } = $props();
     let { ticker, info }  = data;
 
+    let googleFontUrl = $state('https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap');
+    let googleFontName = $state('Yuji Syuku')
+
     let backgroundColor = $state(ticker.backgroundColor);
     let foreGroundColor = $state(ticker.foregroundColor);
     let winForeGroundColor = $state(ticker.textColor);
@@ -58,11 +61,13 @@
     }
 </script>
 
-{#if info}
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap');
-</style>
+<svelte:head>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="{googleFontUrl}" rel="stylesheet">
+</svelte:head>
 
+{#if info}
 <svg viewBox="0 0 {fullWidth} {300}">
     <defs>
         <filter id="shadow">
@@ -90,7 +95,7 @@
         x="{player1NameFontX}"
         y="{nameFontY}"
         font-size="{nameFontSize}"
-        font-family="Dela Gothic One, san serif"><tspan fill="{foreGroundColor}">{player1Name}</tspan></text>
+        font-family="{googleFontName}, san serif"><tspan fill="{foreGroundColor}">{player1Name}</tspan></text>
     <line
         x1="{marginX+tickerWidth-padding*2-nameFontSize}"
         y1="5"
@@ -103,7 +108,7 @@
         x="{marginX+tickerWidth-padding}"
         y="{nameFontY}"
         font-size="{nameFontSize}"
-        font-family="Dela Gothic One, san serif"><tspan fill="{winForeGroundColor}">{player1Wins}</tspan></text>
+        font-family="{googleFontName}, san serif"><tspan fill="{winForeGroundColor}">{player1Wins}</tspan></text>
 
     <!-- slit 1 -->
     <rect
@@ -117,7 +122,7 @@
         x="{marginX+tickerWidth+slitWidth/2}"
         y="{slitFontY}"
         font-size="{slitFontSize}"
-        font-family="Dela Gothic One, san serif"><tspan fill="{winForeGroundColor}">{data.info.slit1}</tspan></text>
+        font-family="{googleFontName}, san serif"><tspan fill="{winForeGroundColor}">{data.info.slit1}</tspan></text>
 
     <!-- center icon -->
     {#if centerText}
@@ -133,7 +138,7 @@
         x="{marginX+tickerWidth+slitWidth+centerAreaWidth/2}"
         y="{centerAreaFontY}"
         font-size="{centerAreaFontSize}"
-        font-family="Dela Gothic One, san serif"><tspan fill="{centerForeGroundColor}">{centerText}</tspan></text>
+        font-family="{googleFontName}, san serif"><tspan fill="{centerForeGroundColor}">{centerText}</tspan></text>
     {/if}
 
     <!-- slit 2 -->
@@ -148,7 +153,7 @@
         x="{marginX+tickerWidth+slitWidth+centerAreaWidth+slitWidth/2}"
         y="{slitFontY}"
         font-size="{slitFontSize}"
-        font-family="Dela Gothic One, san serif"><tspan fill="{winForeGroundColor}">{data.info.slit2}</tspan></text>
+        font-family="{googleFontName}, san serif"><tspan fill="{winForeGroundColor}">{data.info.slit2}</tspan></text>
 
     <!-- player 2 -->
     <rect
@@ -164,7 +169,7 @@
         x="{player2NameFontX}"
         y="{nameFontY}"
         font-size="{nameFontSize}"
-        font-family="Dela Gothic One, san serif"><tspan fill="{foreGroundColor}">{player2Name}</tspan></text>
+        font-family="{googleFontName}, san serif"><tspan fill="{foreGroundColor}">{player2Name}</tspan></text>
     <line
         x1="{marginX+tickerWidth+slitWidth*2+centerAreaWidth+padding*2+nameFontSize}"
         y1="5"
@@ -177,7 +182,7 @@
         x="{marginX+tickerWidth+slitWidth*2+centerAreaWidth+padding}"
         y="{nameFontY}"
         font-size="{nameFontSize}"
-        font-family="Dela Gothic One, san serif"><tspan fill="{winForeGroundColor}">{player2Wins}</tspan></text>
+        font-family="{googleFontName}, san serif"><tspan fill="{winForeGroundColor}">{player2Wins}</tspan></text>
 
 
 </svg>
