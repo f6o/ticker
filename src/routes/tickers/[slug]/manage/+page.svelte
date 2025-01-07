@@ -103,7 +103,10 @@
 </div>
 </form>
 {/if}
+<hgroup>
 <h2>レイアウト情報</h2>
+<p class="caution">自動で反映されないため、色の設定後、OBSのブラウザソースのプロパティ画面から「現在のページのキャッシュを更新」をしてください。</p>
+</hgroup>
 {#if loading}
 <div>
     <p aria-busy="true">情報取得中...</p>
