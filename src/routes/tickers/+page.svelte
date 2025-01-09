@@ -16,7 +16,7 @@
         </ul>
         <li>また、管理画面は <code>/tickers/ティッカーの名前/manage</code>で、パスフレーズによりアクセスが制限されます。</li>
         <ul>
-            <li>例: <a href="/tickers/12345">/tickers/12345/manage</a></li>
+            <li>例: <a href="/tickers/12345/manage">/tickers/12345/manage</a></li>
         </ul>
     </ul>
     <form method="POST" action="/tickers?/create">
