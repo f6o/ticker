@@ -6,8 +6,8 @@
     let { data } : { data : PageData } = $props();
     let { ticker, info }  = data;
 
-    let googleFontUrl = $state('https://fonts.googleapis.com/css2?family=Yuji+Syuku&display=swap');
-    let googleFontName = $state('Yuji Syuku')
+    let googleFontName = $state('Dela Gothic One')
+    let googleFontUrl = $derived('https://fonts.googleapis.com/css2?family='+googleFontName+'&display=swap');
 
     let backgroundColor = $state(ticker.backgroundColor);
     let foreGroundColor = $state(ticker.foregroundColor);
@@ -63,7 +63,7 @@
 
 <svelte:head>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
 <link href="{googleFontUrl}" rel="stylesheet">
 </svelte:head>
 
